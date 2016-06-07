@@ -6,4 +6,7 @@
     <dimen name="level_selectLevel">24sp</dimen>
     <dimen name="fragment_padding">16dp</dimen>
     <dimen name="level_listItemSize">22sp</dimen>
+    <dimen name="game_taskText">36sp</dimen>
+    <dimen name="game_answerButton">28sp</dimen>
+    <dimen name="game_topMenu">24sp</dimen>
 </resources>

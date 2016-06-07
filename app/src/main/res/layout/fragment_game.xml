@@ -1,13 +1,162 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.Game">
+    tools:context="layout.Game"
+    android:orientation="vertical"
+    android:padding="@dimen/fragment_padding">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:id="@+id/game_progressTextView"
+            android:text="Zadanie 1/10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/game_topMenu"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:id="@+id/game_backToMenu"
+            android:text="WRÓĆ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/game_topMenu"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/game_taskTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3 * 15 = 45"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/game_taskText"
+            />
+
+        <ProgressBar
+            android:id="@+id/game_progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"/>
+
+        <TextView
+            android:id="@+id/game_verdictTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DOBRZE!"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/game_taskText"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:weightSum="1"
+            android:gravity="bottom">
+
+            <Button
+                android:id="@+id/game_button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/game_button6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="6"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="7"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+            <Button
+                android:id="@+id/game_button0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_weight="0.2"
+                android:textSize="@dimen/game_answerButton"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

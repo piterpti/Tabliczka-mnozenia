@@ -31,7 +31,7 @@ public class LevelAdapter extends ArrayAdapter{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.level_adapter, parent, false);
         }
         TextView listItem = (TextView) convertView.findViewById(R.id.level_listItem);
-        String textToDisp = lvl.getName() + "\n" + lvl.getCount() + "pytań | " + lvl.getTime() + " sekund na odpowiedź";
+        String textToDisp = lvl.getName() + "\n" + lvl.getCount() + " pytań | " + lvl.getTime() + " sekund na odpowiedź";
         listItem.setText(textToDisp);
         if(lvl.isLocked())
             listItem.setTextColor(INACTIVE_COLOR);

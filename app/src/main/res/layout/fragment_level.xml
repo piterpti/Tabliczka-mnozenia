@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="layout.Level"
+    android:padding="@dimen/fragment_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Wybierz poziom trudności:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/level_selectLevel"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        />
+
+    <ListView
+        android:id="@+id/level_levelList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

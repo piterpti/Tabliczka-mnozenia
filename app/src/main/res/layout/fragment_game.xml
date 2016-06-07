@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="DOBRZE!"
             android:gravity="center_horizontal"
+            android:visibility="invisible"
             android:textSize="@dimen/game_taskText"/>
     </LinearLayout>
 

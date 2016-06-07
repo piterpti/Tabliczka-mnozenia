@@ -3,4 +3,5 @@
     <dimen name="menu_buttonFontSize">46sp</dimen>
     <dimen name="level_selectLevel">36sp</dimen>
     <dimen name="fragment_padding">16dp</dimen>
+    <dimen name="level_listItemSize">28sp</dimen>
 </resources>

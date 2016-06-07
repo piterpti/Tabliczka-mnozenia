@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.Level"
+    tools:context="layout.LevelFrag"
     android:padding="@dimen/fragment_padding"
     android:orientation="vertical">
 
@@ -13,6 +13,7 @@
         android:textSize="@dimen/level_selectLevel"
         android:gravity="center_horizontal"
         android:textColor="@android:color/black"
+        android:layout_marginBottom="24dp"
         />
 
     <ListView

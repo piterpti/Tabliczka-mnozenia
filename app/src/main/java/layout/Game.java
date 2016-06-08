@@ -2,6 +2,8 @@ package layout;
 
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -24,12 +26,19 @@ import adrian.kamil.tabliczkamnozenia.R;
  */
 public class Game extends Fragment {
 
+    private final int PROGRESS_BAR_CHANGE = 20;
+    private final int TIME_TO_WAIT = 10;
+
     private Button [] answerButtons;
     private TextView verdictTextView;
     private ProgressBar progressBar;
     private TextView progressTextView;
     private Button backToMenu;
     private TextView currentTaskTextView;
+    private String enteredText = "";
+    private String task;
+    private CountDownTimer answerTimer;
+    private boolean nextQuestion;
 
     private Task currentTask;
 
@@ -70,7 +79,60 @@ public class Game extends Fragment {
                 BackToMenu();
             }
         });
+        AddListenerToButtons();
         LoadQuestion();
+    }
+
+    private void AddListenerToButtons() {
+        for(Button b : answerButtons)
+        {
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Button button = (Button) v;
+                    enteredText += button.getText();
+                    currentTaskTextView.setText(task + " " + enteredText);
+                    if(currentTask.CheckCorrectAnswer(enteredText)) {
+                        Verdict(true);
+                    }
+                    else if(currentTask.CheckEnteredText(enteredText)) {
+
+                    }
+                    else {
+                        Verdict(false);
+                    }
+                }
+            });
+        }
+    }
+
+    private void Verdict(boolean correct)
+    {
+        enteredText = "";
+        TurnOffTimer();
+        verdictTextView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+        currentTask.setCorrectAnswer(correct);
+        if(correct)
+        {
+            verdictTextView.setText(getResources().getString(R.string.game_goodAnswer));
+        }
+        else
+        {
+            verdictTextView.setText(getResources().getString(R.string.game_wrongAnswer));
+            currentTaskTextView.setVisibility(View.INVISIBLE);
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                verdictTextView.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                currentTaskTextView.setVisibility(View.VISIBLE);
+                nextQuestion = true;
+                LoadQuestion();
+            }
+        }, TIME_TO_WAIT);
     }
 
     public void CreateGame()
@@ -78,16 +140,39 @@ public class Game extends Fragment {
         Level level = Activity.GAME_PROGRESS.getLevel();
         Activity.GAME_PROGRESS = new GameProgress(level);
         Activity.GAME_PROGRESS.setTasks(Task.GenerateQuestionForGame(Activity.GAME_PROGRESS.getLevel().getCount()));
+        nextQuestion = true;
     }
 
     private void LoadQuestion()
     {
-        currentTask = Activity.GAME_PROGRESS.getCurrentTask();
-        currentTaskTextView.setText(currentTask.toString());
+        if(nextQuestion)
+        {
+            nextQuestion = false;
+            if(!Activity.GAME_PROGRESS.setToNextTaskIfExist())
+            {
+                GoToSummary();
+                return;
+            }
+            CreateTimer(Activity.GAME_PROGRESS.getLevel().getTime() * 1000);
+        }
+        progressTextView.setText(getResources().getString(R.string.game_task) + ": " + Activity.GAME_PROGRESS.getCurrentTask() + "/" + Activity.GAME_PROGRESS.getLevel().getCount());
+        currentTask = Activity.GAME_PROGRESS.getTask();
+        task = currentTask.toString();
+        currentTaskTextView.setText(task + " " + enteredText);
+    }
+
+    private void GoToSummary() {
+        GameEnd gameEnd = new GameEnd();
+        gameEnd.setRetainInstance(true);
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, gameEnd, Activity.GAME_ENDED_TAG);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void BackToMenu()
     {
+        TurnOffTimer();
         Menu menu = new Menu();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, menu, Activity.MENU_TAG);
@@ -95,4 +180,35 @@ public class Game extends Fragment {
         transaction.commit();
     }
 
+    private void CreateTimer(int time) {
+        TurnOffTimer();
+        progressBar.setProgress(100);
+        answerTimer = new CountDownTimer(time, PROGRESS_BAR_CHANGE) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                float ppp = millisUntilFinished / Activity.GAME_PROGRESS.getLevel().getTime() / 10;
+                progressBar.setProgress((int) ppp);
+            }
+
+            @Override
+            public void onFinish() {
+                Verdict(false);
+            }
+        };
+        answerTimer.start();
+    }
+
+    private void TurnOffTimer()
+    {
+        if(answerTimer != null) {
+            answerTimer.cancel();
+            answerTimer = null;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        TurnOffTimer();
+    }
 }

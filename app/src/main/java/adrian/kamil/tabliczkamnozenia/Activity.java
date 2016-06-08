@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import adrian.kamil.tabliczkamnozenia.Others.Achievement;
 import adrian.kamil.tabliczkamnozenia.Others.GameProgress;
 import adrian.kamil.tabliczkamnozenia.Others.Level;
 import adrian.kamil.tabliczkamnozenia.Others.Task;
-import layout.Achievement;
+import layout.AchievementFrag;
 import layout.Game;
+import layout.GameEnd;
 import layout.LevelFrag;
 import layout.Menu;
 
@@ -25,10 +27,13 @@ public class Activity extends AppCompatActivity {
     public static final String ACHIEVEMENT_TAG = "ACHIEVEMENT";
     public static final String DIFFICULT_LEVEL_KEY = "DIFFICULT_LEVEL";
     public static final String SUPER_MEMO_SHARED = "SUPER_MEMO_HELPER";
+    public static final String ACHIEVEMENT_KEY = "ACHIEVEMENT_KEY";
 
     public static final Level [] LEVELS = Level.GET_LEVELS();
     public static GameProgress GAME_PROGRESS;
     public static Task[] GAME_TASKS;
+    public static int[] UNLOCKED_ACHIEVEMENTS;
+    public static Achievement[] ACHIEVEMENTS;
 
     public static Context CONTEXT;
 
@@ -45,6 +50,29 @@ public class Activity extends AppCompatActivity {
             transaction.commit();
             init();
             LoadLevel();
+            LoadAchievements();
+        }
+    }
+
+    private void LoadAchievements() {
+        ACHIEVEMENTS = Achievement.CreateAchievements();
+        UNLOCKED_ACHIEVEMENTS = new int[5];
+        String achievements = PreferenceManager.getDefaultSharedPreferences(CONTEXT).getString(ACHIEVEMENT_KEY, "");
+        if(achievements.length() < 1) {
+            achievements = "0,0,0,0,0";
+            PreferenceManager.getDefaultSharedPreferences(CONTEXT).edit().putString(ACHIEVEMENT_KEY, achievements).commit();
+        } else {
+            String ach[] = achievements.split(",");
+            int counter = 0;
+            for(String a : ach)
+            {
+                UNLOCKED_ACHIEVEMENTS[counter] = Integer.valueOf(a);
+                counter++;
+            }
+        }
+        Log.d("blabla", achievements);
+        for(int i = 0; i < UNLOCKED_ACHIEVEMENTS[GAME_PROGRESS.getLevel().getId() - 1]; i++) {
+            ACHIEVEMENTS[i].setLocked(false);
         }
     }
 
@@ -64,7 +92,6 @@ public class Activity extends AppCompatActivity {
             for(Task t : GAME_TASKS) {
                 t.setMistakes(Integer.valueOf(mistakes[counter]));
                 counter++;
-                Log.d("blabla", t.toString());
             }
         }
     }
@@ -98,15 +125,15 @@ public class Activity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, game, GAME_FRAGMENT_TAG);
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
 
     public void Achievements(View view) {
-        Achievement achievement = new Achievement();
+        AchievementFrag achievementFrag = new AchievementFrag();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, achievement, ACHIEVEMENT_TAG);
+        transaction.replace(R.id.fragment_container, achievementFrag, ACHIEVEMENT_TAG);
         transaction.addToBackStack(null);
         transaction.commit();
+        LoadAchievements();
     }
 
     public void Level(View view) {
@@ -124,6 +151,18 @@ public class Activity extends AppCompatActivity {
         if(menuFragment != null && menuFragment.isVisible()) {
             System.exit(0);
         }
-        super.onBackPressed();
+        boolean callSuper = true;
+        GameEnd gameEnd = null;
+        gameEnd = (GameEnd) getSupportFragmentManager().findFragmentByTag(GAME_ENDED_TAG);
+        if(gameEnd != null && gameEnd.isVisible())
+        {
+            gameEnd.BackToMenu();
+            callSuper = false;
+        }
+
+        if(callSuper)
+        {
+            super.onBackPressed();
+        }
     }
 }

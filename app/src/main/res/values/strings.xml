@@ -7,4 +7,10 @@
     <string name="menu_DifficultLevel">Poziom trudności</string>
     <string name="menu_Achievements">Osiągnięcia</string>
     <string name="menu_Exit">Wyjście</string>
+    <string name="game_goodAnswer">Dobrze!</string>
+    <string name="game_wrongAnswer">Źle</string>
+    <string name="game_task">Zadanie</string>
+    <string name="end_Menu">MENU</string>
+    <string name="end_gameEnded">Rozgrywka zakończona</string>
+    <string name="ach_Achievement">Osiągnięcia:</string>
 </resources>

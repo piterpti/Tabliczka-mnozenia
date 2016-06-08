@@ -49,6 +49,24 @@ public class Task {
         }
     }
 
+    public boolean CheckEnteredText(String text)
+    {
+        if(text.length() > getCorrectAnswer().length())
+        {
+            return false;
+        }
+        if(getCorrectAnswer().substring(0, text.length()).equals(text))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+
     public boolean isCorrectAnswer() {
         return correctAnswer;
     }

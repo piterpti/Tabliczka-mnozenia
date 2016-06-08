@@ -9,4 +9,6 @@
     <dimen name="game_taskText">36sp</dimen>
     <dimen name="game_answerButton">28sp</dimen>
     <dimen name="game_topMenu">24sp</dimen>
+    <dimen name="end_gameEnded">24sp</dimen>
+    <dimen name="end_result">20sp</dimen>
 </resources>

@@ -22,25 +22,40 @@ public class GameProgress {
         this.level = level;
     }
 
-    public Task[] getTasks() {
-        return tasks;
-    }
-
     public void setTasks(Task[] tasks) {
         this.tasks = tasks;
     }
 
-    public Task getCurrentTask()
+    public Task getTask()
     {
-        return tasks[currentTask];
+        if(currentTask - 1 < level.getCount() )
+            return tasks[currentTask - 1];
+        else
+            return tasks[0];
     }
 
     public boolean setToNextTaskIfExist()
     {
         currentTask++;
-        if(tasks.length >= currentTask)
+        if(currentTask - 1 >= level.getCount() )
             return false;
         else
             return true;
+    }
+
+    public int getCurrentTask() {
+        return currentTask;
+    }
+
+    public int getCorrectAnswers()
+    {
+        if(tasks.length < 1)
+            return -1;
+        int correctAnswers = 0;
+        for(Task task : tasks) {
+            if(task.isCorrectAnswer())
+                correctAnswers++;
+        }
+        return correctAnswers;
     }
 }

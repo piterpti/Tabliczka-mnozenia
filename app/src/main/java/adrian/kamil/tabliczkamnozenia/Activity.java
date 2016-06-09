@@ -49,9 +49,11 @@ public class Activity extends AppCompatActivity {
             transaction.add(R.id.fragment_container, menu, MENU_TAG);
             transaction.addToBackStack(null);
             transaction.commit();
+            GAME_PROGRESS = new GameProgress(null);
             init();
             LoadLevel();
             LoadAchievements();
+
         }
     }
 
@@ -103,7 +105,6 @@ public class Activity extends AppCompatActivity {
         Collections.shuffle(arrayList);
         GAME_TASKS = arrayList.toArray(GAME_TASKS);
         Arrays.sort(GAME_TASKS);
-        GAME_PROGRESS = new GameProgress(null);
     }
 
 
@@ -124,6 +125,7 @@ public class Activity extends AppCompatActivity {
     }
 
     public void NewGame(View view) {
+        init();
         Game game = new Game();
         game.setRetainInstance(true);
         game.CreateGame();
@@ -131,7 +133,7 @@ public class Activity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, game, GAME_FRAGMENT_TAG);
         transaction.addToBackStack(null);
         transaction.commit();
-        Arrays.sort(GAME_TASKS);
+
     }
 
     public void Achievements(View view) {

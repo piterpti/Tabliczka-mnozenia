@@ -133,9 +133,6 @@ public class Game extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                verdictTextView.setVisibility(View.INVISIBLE);
-                progressBar.setVisibility(View.VISIBLE);
-                currentTaskTextView.setVisibility(View.VISIBLE);
                 nextQuestion = true;
                 LoadQuestion();
                 LockUnlockButtons(true);
@@ -171,6 +168,9 @@ public class Game extends Fragment {
             }
             CreateTimer(Activity.GAME_PROGRESS.getLevel().getTime() * 1000);
         }
+        verdictTextView.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        currentTaskTextView.setVisibility(View.VISIBLE);
         progressTextView.setText(getResources().getString(R.string.game_task) + ": " + Activity.GAME_PROGRESS.getCurrentTask() + "/" + Activity.GAME_PROGRESS.getLevel().getCount());
         currentTask = Activity.GAME_PROGRESS.getTask();
         task = currentTask.toString();

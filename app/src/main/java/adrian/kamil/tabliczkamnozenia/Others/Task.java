@@ -154,6 +154,9 @@ public class Task implements Comparable<Task>{
         ArrayList<Task> arrayList = new ArrayList<>(Arrays.asList(toReturn));
         Collections.shuffle(arrayList);
         toReturn = arrayList.toArray(toReturn);
+        for(Task t : toReturn) {
+            Log.d("blabla", t.toStringDebug());
+        }
         return toReturn;
     }
 

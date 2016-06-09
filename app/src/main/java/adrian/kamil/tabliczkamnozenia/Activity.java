@@ -99,6 +99,9 @@ public class Activity extends AppCompatActivity {
     private void init() {
         GAME_TASKS = Task.GET_ALL_TASKS();
         LoadSharedPreferencesToTasks();
+        ArrayList<Task> arrayList = new ArrayList<>(Arrays.asList(GAME_TASKS));
+        Collections.shuffle(arrayList);
+        GAME_TASKS = arrayList.toArray(GAME_TASKS);
         Arrays.sort(GAME_TASKS);
         GAME_PROGRESS = new GameProgress(null);
     }

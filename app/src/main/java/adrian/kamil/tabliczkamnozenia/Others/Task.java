@@ -150,15 +150,10 @@ public class Task implements Comparable<Task>{
         {
             toReturn[i] = Activity.GAME_TASKS[i];
         }
-        Arrays.sort(toReturn, new Comparator<Task>() {
-            @Override
-            public int compare(Task lhs, Task rhs) {
-                if(new Random().nextBoolean())
-                    return 1;
-                else
-                    return -1;
-            }
-        });
+
+        ArrayList<Task> arrayList = new ArrayList<>(Arrays.asList(toReturn));
+        Collections.shuffle(arrayList);
+        toReturn = arrayList.toArray(toReturn);
         return toReturn;
     }
 
@@ -168,10 +163,7 @@ public class Task implements Comparable<Task>{
             return -5;
         else if(mistakes == another.mistakes)
         {
-            if(new Random().nextBoolean())
-                return 1;
-            else
-                return -1;
+            return 0;
         }
         else
             return 5;

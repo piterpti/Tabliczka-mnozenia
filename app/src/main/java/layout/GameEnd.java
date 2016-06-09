@@ -81,6 +81,9 @@ public class GameEnd extends Fragment {
             superMemo += t.getMistakes() + ",";
         }
         PreferenceManager.getDefaultSharedPreferences(Activity.CONTEXT).edit().putString(Activity.SUPER_MEMO_SHARED, superMemo).commit();
+        ArrayList<Task> arrayList = new ArrayList<>(Arrays.asList(Activity.GAME_TASKS));
+        Collections.shuffle(arrayList);
+        Activity.GAME_TASKS = arrayList.toArray(Activity.GAME_TASKS);
     }
 
     private void CheckAchievements(int percentAnswers) {

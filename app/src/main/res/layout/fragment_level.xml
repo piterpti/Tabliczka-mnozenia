@@ -6,28 +6,29 @@
     android:padding="@dimen/fragment_padding"
     android:orientation="vertical">
 
-    <TextView
-        android:text="Poziom trudności:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/level_selectLevel"
-        android:gravity="left"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="24dp"
-        />
-
-    <ListView
-        android:id="@+id/level_levelList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="12dp"/>
-
     <Button
         android:id="@+id/level_resetAchievements"
         android:text="Resetuj osiągnięcia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/level_selectLevel"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:paddingBottom="12dp"/>
+
+        <TextView
+        android:text="Poziom trudności:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/level_selectLevel"
+        android:gravity="left"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="24dp"/>
+
+    <ListView
+        android:id="@+id/level_levelList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
 </LinearLayout>

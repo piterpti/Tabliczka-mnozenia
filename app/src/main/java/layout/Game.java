@@ -116,6 +116,7 @@ public class Game extends Fragment {
         TurnOffTimer();
         verdictTextView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
+        LockUnlockButtons(false);
         currentTask.setCorrectAnswer(correct);
         if(correct)
         {
@@ -137,8 +138,17 @@ public class Game extends Fragment {
                 currentTaskTextView.setVisibility(View.VISIBLE);
                 nextQuestion = true;
                 LoadQuestion();
+                LockUnlockButtons(true);
             }
         }, TIME_TO_WAIT);
+    }
+
+    private void LockUnlockButtons(boolean onOff)
+    {
+        for(Button button : answerButtons)
+        {
+            button.setEnabled(onOff);
+        }
     }
 
     public void CreateGame()

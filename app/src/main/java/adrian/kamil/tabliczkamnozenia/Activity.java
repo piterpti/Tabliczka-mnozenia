@@ -100,12 +100,11 @@ public class Activity extends AppCompatActivity {
         GAME_TASKS = Task.GET_ALL_TASKS();
         LoadSharedPreferencesToTasks();
         Arrays.sort(GAME_TASKS);
-        for(Task t : GAME_TASKS) {
-            Log.d("blabla", t.toStringDebug());
-        }
         GAME_PROGRESS = new GameProgress(null);
-
     }
+
+
+
     private void LoadLevel()
     {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -129,6 +128,7 @@ public class Activity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, game, GAME_FRAGMENT_TAG);
         transaction.addToBackStack(null);
         transaction.commit();
+        Arrays.sort(GAME_TASKS);
     }
 
     public void Achievements(View view) {

@@ -71,6 +71,12 @@ public class GameEnd extends Fragment {
 
     private void SaveMistakes() {
         String superMemo = "";
+        Arrays.sort(Activity.GAME_TASKS, new Comparator<Task>() {
+            @Override
+            public int compare(Task lhs, Task rhs) {
+                return Integer.valueOf(lhs.getId()).compareTo(Integer.valueOf(rhs.getId()));
+            }
+        });
         for(Task t : Activity.GAME_TASKS) {
             superMemo += t.getMistakes() + ",";
         }

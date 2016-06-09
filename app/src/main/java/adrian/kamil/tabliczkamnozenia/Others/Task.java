@@ -18,6 +18,13 @@ public class Task implements Comparable<Task>{
     private int mistakes;
     private boolean correctAnswer = false;
 
+    public Task(Task t) {
+        this.id = t.getId();
+        this.first = t.getFirst();
+        this.second = t.getSecond();
+        this.mistakes = t.getMistakes();
+    }
+
     public Task(int id, int first, int second) {
         this.id = id;
         this.first = first;
@@ -99,24 +106,17 @@ public class Task implements Comparable<Task>{
                 }
             }
         }
-        ShuffleArray(toReturn);
-
         return toReturn;
     }
 
-    private static void ShuffleArray(Task[] array)
-    {
-        int index;
-        Task temp;
-        Random random = new Random();
-        for (int i = array.length - 1; i > 0; i--)
-        {
-            index = random.nextInt(i + 1);
-            temp = array[index];
-            array[index] = array[i];
-            array[i] = temp;
-        }
+    public int getFirst() {
+        return first;
     }
+
+    public int getSecond() {
+        return second;
+    }
+
 
     @Override
     public String toString() {
@@ -140,25 +140,40 @@ public class Task implements Comparable<Task>{
         this.mistakes = mistakes;
     }
 
+
+
     public static Task[] GenerateQuestionForGame(int count)
     {
         Task[] toReturn = new Task[count];
-        Arrays.sort(Activity.GAME_TASKS);
+
         for(int i = 0; i < count; i++)
         {
             toReturn[i] = Activity.GAME_TASKS[i];
         }
-        ShuffleArray(toReturn);
+        Arrays.sort(toReturn, new Comparator<Task>() {
+            @Override
+            public int compare(Task lhs, Task rhs) {
+                if(new Random().nextBoolean())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
         return toReturn;
     }
 
     @Override
     public int compareTo(Task another) {
         if(mistakes > another.mistakes)
-            return -1;
+            return -5;
         else if(mistakes == another.mistakes)
-            return 0;
+        {
+            if(new Random().nextBoolean())
+                return 1;
+            else
+                return -1;
+        }
         else
-            return 1;
+            return 5;
     }
 }

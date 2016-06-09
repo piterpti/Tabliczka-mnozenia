@@ -18,7 +18,7 @@ import adrian.kamil.tabliczkamnozenia.Others.Achievement;
 import adrian.kamil.tabliczkamnozenia.R;
 
 
-public class AchievementFrag extends Fragment  implements AdapterView.OnItemLongClickListener{
+public class AchievementFrag extends Fragment {
 
     private ListView achListView;
     private AchAdapter achAdapter;
@@ -39,20 +39,5 @@ public class AchievementFrag extends Fragment  implements AdapterView.OnItemLong
         achListView = (ListView) view.findViewById(R.id.ach_listView);
         achAdapter = new AchAdapter(Activity.CONTEXT, Activity.ACHIEVEMENTS);
         achListView.setAdapter(achAdapter);
-        achListView.setOnItemLongClickListener(this);
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Achievement a = (Achievement) parent.getItemAtPosition(position);
-        a.setLocked(false);
-        Activity.UNLOCKED_ACHIEVEMENTS[Activity.GAME_PROGRESS.getLevel().getId() - 1] = position + 1;
-        achAdapter.notifyDataSetChanged();
-        String ach = "";
-        for(int i : Activity.UNLOCKED_ACHIEVEMENTS) {
-            ach += i + ",";
-        }
-        PreferenceManager.getDefaultSharedPreferences(Activity.CONTEXT).edit().putString(Activity.ACHIEVEMENT_KEY, ach).commit();
-        return false;
     }
 }

@@ -11,4 +11,5 @@
     <dimen name="game_topMenu">24sp</dimen>
     <dimen name="end_gameEnded">24sp</dimen>
     <dimen name="end_result">20sp</dimen>
+    <dimen name="level_textSize">18sp</dimen>
 </resources>

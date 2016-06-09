@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_newGame">Nowa gra</string>
-    <string name="menu_DifficultLevel">Poziom trudności</string>
+    <string name="menu_DifficultLevel">Ustawienia</string>
     <string name="menu_Achievements">Osiągnięcia</string>
     <string name="menu_Exit">Wyjście</string>
     <string name="game_goodAnswer">Dobrze!</string>

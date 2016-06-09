@@ -1,6 +1,7 @@
 package layout;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -27,7 +28,10 @@ import adrian.kamil.tabliczkamnozenia.R;
 public class Game extends Fragment {
 
     private final int PROGRESS_BAR_CHANGE = 20;
-    private final int TIME_TO_WAIT = 10;
+    private final int TIME_TO_WAIT = 1000;
+
+    private static final int GOOD_ANSWER_COLOR = Color.GREEN;
+    private static final int WRONG_ANSWER_COLOR = Color.RED;
 
     private Button [] answerButtons;
     private TextView verdictTextView;
@@ -116,10 +120,12 @@ public class Game extends Fragment {
         if(correct)
         {
             verdictTextView.setText(getResources().getString(R.string.game_goodAnswer));
+            verdictTextView.setTextColor(GOOD_ANSWER_COLOR);
         }
         else
         {
             verdictTextView.setText(getResources().getString(R.string.game_wrongAnswer));
+            verdictTextView.setTextColor(WRONG_ANSWER_COLOR);
             currentTaskTextView.setVisibility(View.INVISIBLE);
         }
         Handler handler = new Handler();

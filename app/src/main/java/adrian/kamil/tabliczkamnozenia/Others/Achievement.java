@@ -32,6 +32,14 @@ public class Achievement {
         };
     }
 
+    public int getCorrectAnswersPercent() {
+        return correctAnswersPercent;
+    }
+
+    public void setCorrectAnswersPercent(int correctAnswersPercent) {
+        this.correctAnswersPercent = correctAnswersPercent;
+    }
+
     public boolean isLocked() {
         return locked;
     }

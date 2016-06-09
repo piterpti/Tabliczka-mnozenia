@@ -18,6 +18,7 @@ import layout.Game;
 import layout.GameEnd;
 import layout.LevelFrag;
 import layout.Menu;
+import java.util.*;
 
 public class Activity extends AppCompatActivity {
 
@@ -70,7 +71,6 @@ public class Activity extends AppCompatActivity {
                 counter++;
             }
         }
-        Log.d("blabla", achievements);
         for(int i = 0; i < UNLOCKED_ACHIEVEMENTS[GAME_PROGRESS.getLevel().getId() - 1]; i++) {
             ACHIEVEMENTS[i].setLocked(false);
         }
@@ -99,6 +99,10 @@ public class Activity extends AppCompatActivity {
     private void init() {
         GAME_TASKS = Task.GET_ALL_TASKS();
         LoadSharedPreferencesToTasks();
+        Arrays.sort(GAME_TASKS);
+        for(Task t : GAME_TASKS) {
+            Log.d("blabla", t.toStringDebug());
+        }
         GAME_PROGRESS = new GameProgress(null);
 
     }

@@ -2,16 +2,25 @@ package layout;
 
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import adrian.kamil.tabliczkamnozenia.Activity;
+import adrian.kamil.tabliczkamnozenia.Others.AchAdapter;
+import adrian.kamil.tabliczkamnozenia.Others.Achievement;
+import adrian.kamil.tabliczkamnozenia.Others.GameProgress;
+import adrian.kamil.tabliczkamnozenia.Others.Task;
 import adrian.kamil.tabliczkamnozenia.R;
+import java.util.*;
 
 
 /**
@@ -21,10 +30,12 @@ public class GameEnd extends Fragment {
 
     private Button backMenuButton;
     private TextView resultTextView;
+    private LinearLayout achievementsLayout;
+    private ListView achievementListView;
+    private ArrayList<Achievement> unlockedAchievements;
 
 
     public GameEnd() {
-        // Required empty public constructor
     }
 
 
@@ -39,6 +50,8 @@ public class GameEnd extends Fragment {
     private void init(View view) {
         resultTextView = (TextView) view.findViewById(R.id.end_resultTextView);
         backMenuButton = (Button) view.findViewById(R.id.end_backToMenu);
+        achievementsLayout = (LinearLayout) view.findViewById(R.id.end_achievementLayout);
+        achievementListView = (ListView) view.findViewById(R.id.end_unlockedAchievements);
         backMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +65,31 @@ public class GameEnd extends Fragment {
         String result = String.format("%.2f", percentAnswers) + "%";
         result += " (" + correctAnswers + "/" + questionCount + ")";
         resultTextView.setText(result);
+        CheckAchievements((int) percentAnswers);
+        SaveMistakes();
+    }
+
+    private void SaveMistakes() {
+        String superMemo = "";
+        for(Task t : Activity.GAME_TASKS) {
+            superMemo += t.getMistakes() + ",";
+        }
+        PreferenceManager.getDefaultSharedPreferences(Activity.CONTEXT).edit().putString(Activity.SUPER_MEMO_SHARED, superMemo).commit();
+    }
+
+    private void CheckAchievements(int percentAnswers) {
+        if(unlockedAchievements == null)
+        {
+            unlockedAchievements = Activity.GAME_PROGRESS.getUnlockedAchievements(percentAnswers);
+        }
+        if(unlockedAchievements.size() > 0)
+        {
+            achievementsLayout.setVisibility(View.VISIBLE);
+            Achievement[] array = new Achievement[unlockedAchievements.size()];
+            array = unlockedAchievements.toArray(array);
+            AchAdapter achAdapter = new AchAdapter(Activity.CONTEXT, array);
+            achievementListView.setAdapter(achAdapter);
+        }
     }
 
     public void BackToMenu()

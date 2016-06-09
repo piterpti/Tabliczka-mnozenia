@@ -8,4 +8,6 @@
     <dimen name="game_answerButton">36sp</dimen>
     <dimen name="game_topMenu">32sp</dimen>
     <dimen name="end_gameEnded">36sp</dimen>
+    <dimen name="level_textSize">32sp</dimen>
+    <dimen name="end_result">32sp</dimen>
 </resources>

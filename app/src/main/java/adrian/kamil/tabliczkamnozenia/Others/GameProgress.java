@@ -1,5 +1,9 @@
 package adrian.kamil.tabliczkamnozenia.Others;
 
+import android.preference.PreferenceManager;
+
+import adrian.kamil.tabliczkamnozenia.Activity;
+import java.util.*;
 /**
  * Created by Piter on 07/06/2016.
  */
@@ -57,5 +61,36 @@ public class GameProgress {
                 correctAnswers++;
         }
         return correctAnswers;
+    }
+
+    public ArrayList<Achievement> getUnlockedAchievements(int percentAnswers)
+    {
+        int counter = 0;
+        int counterUnlocked = 0;
+        ArrayList<Achievement> unlocked = new ArrayList<>();
+        for(Achievement ach : Activity.ACHIEVEMENTS)
+        {
+            if(!ach.isLocked())
+            {
+                counterUnlocked++;
+                counter++;
+            }
+            else if(ach.getCorrectAnswersPercent() <= percentAnswers) {
+                ach.setLocked(false);
+                unlocked.add(ach);
+                counter++;
+            }
+        }
+        if(counter > counterUnlocked)
+        {
+            Activity.UNLOCKED_ACHIEVEMENTS[Activity.GAME_PROGRESS.getLevel().getId() - 1] = counter;
+            String ach = "";
+            for(int i : Activity.UNLOCKED_ACHIEVEMENTS) {
+                ach += i + ",";
+            }
+            PreferenceManager.getDefaultSharedPreferences(Activity.CONTEXT).edit().putString(Activity.ACHIEVEMENT_KEY, ach).commit();
+        }
+
+        return unlocked;
     }
 }

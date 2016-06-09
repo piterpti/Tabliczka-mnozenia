@@ -12,7 +12,7 @@
         android:text="@string/ach_Achievement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:textSize="48sp"
         android:layout_marginBottom="16dp"/>
 
     <ListView

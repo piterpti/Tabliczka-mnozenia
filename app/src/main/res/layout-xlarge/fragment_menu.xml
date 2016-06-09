@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:textSize="@dimen/menu_buttonFontSize"
+        android:textSize="42sp"
         android:onClick="NewGame"
         android:background="#87D0E8"/>
     <Button
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:textSize="@dimen/menu_buttonFontSize"
+        android:textSize="42sp"
         android:onClick="Level"
         android:background="#D087E8"/>
     <Button
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:textSize="@dimen/menu_buttonFontSize"
+        android:textSize="42sp"
         android:onClick="Achievements"
         android:background="#E8A087"/>
     <Button
@@ -36,6 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
         android:onClick="ExitApp"
-        android:textSize="@dimen/menu_buttonFontSize"
+        android:textSize="42sp"
         android:background="#9FE887"/>
 </LinearLayout>

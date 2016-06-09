@@ -12,7 +12,7 @@
         android:text="Resetuj osiągnięcia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/level_selectLevel"
+        android:textSize="48sp"
         android:gravity="center_horizontal"
         android:paddingBottom="12dp"/>
 
@@ -20,7 +20,7 @@
         android:text="Poziom trudności:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/level_selectLevel"
+        android:textSize="48sp"
         android:gravity="left"
         android:textColor="@android:color/black"
         android:layout_marginBottom="24dp"/>
